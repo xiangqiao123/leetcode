@@ -1,8 +1,5 @@
 package my;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ZigZagConversion {
 	
 	public String convert(String s, int numRows) {
@@ -10,9 +7,16 @@ public class ZigZagConversion {
         for(int i=0;i<numRows;i++){
         	strs[i]=new StringBuffer();
         }
-       
+       int index=0;
+       int flag=0;
         for(int i=0;i<s.length();i++){
-        	strs[i%(numRows+1)!=numRows?i%(numRows+1):numRows/2].append(s.charAt(i));
+        	strs[index].append(s.charAt(i));
+        	if(index==0 && index!=numRows-1){
+        		flag=1;
+        	}else if(index !=0 && index==numRows-1){
+        		flag=-1;
+        	}
+        	index=index+flag;
         }
         
         StringBuffer result=new StringBuffer();
@@ -24,7 +28,7 @@ public class ZigZagConversion {
     }
 	
 	public static void main(String[] args) {
-		System.out.println(new ZigZagConversion().convert("PAYPALISHIRING", 3));
+		System.out.println(new ZigZagConversion().convert("AB", 1));
 	}
 
 }
